@@ -23,6 +23,12 @@ class TabView
     if location is 'center' or not @item.isPermanentDockItem?()
       closeIcon = document.createElement('div')
       closeIcon.classList.add('close-icon')
+
+      if atom.config.get('tabs.closeIconPositionLeft')
+        closeIcon.classList.add('close-icon-left')
+      else
+        closeIcon.classList.add('close-icon-right')
+
       closeIcon.onclick = didClickCloseIcon
       @element.appendChild(closeIcon)
 

@@ -82,6 +82,7 @@ class TabBarView
     @subscriptions.add atom.config.observe 'tabs.tabScrolling', @updateTabScrolling.bind(this)
     @subscriptions.add atom.config.observe 'tabs.tabScrollingThreshold', => @updateTabScrollingThreshold()
     @subscriptions.add atom.config.observe 'tabs.alwaysShowTabBar', => @updateTabBarVisibility()
+    @subscriptions.add atom.config.observe 'tabs.closeIconPositionLeft', => @updateCloseIconPositions()
 
     @updateActiveTab()
 
@@ -438,6 +439,15 @@ class TabBarView
       @element.addEventListener 'mousewheel', @onMouseWheel.bind(this)
     else
       @element.removeEventListener 'mousewheel', @onMouseWheel.bind(this)
+
+  updateCloseIconPositions: ->
+    for icon in @element.querySelectorAll('.close-icon')
+      if atom.config.get('tabs.closeIconPositionLeft')
+        icon.classList.remove('close-icon-right')
+        icon.classList.add('close-icon-left')
+      else
+        icon.classList.remove('close-icon-left')
+        icon.classList.add('close-icon-right')
 
   browserWindowForId: (id) ->
     BrowserWindow ?= require('electron').remote.BrowserWindow
