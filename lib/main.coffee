@@ -50,7 +50,7 @@ module.exports =
           tabBarView.closeAllTabs()
 
     paneContainers =
-      center: atom.workspace.getCenter?() ? atom.workspace
+      center: atom.workspace.getCenter?()
       left: atom.workspace.getLeftDock?()
       right: atom.workspace.getRightDock?()
       bottom: atom.workspace.getBottomDock?()
